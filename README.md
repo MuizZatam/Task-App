@@ -6,7 +6,7 @@ A simple CRUD API built as an example to practice development with Node, Express
 
 ## Running the Application Locally
 
-1. **Through Docker**
+**1. Through Docker**
 
 ```sh
 
