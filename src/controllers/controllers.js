@@ -2,9 +2,9 @@ const models = require('../models/models');
 
 const controllers = {
 
-    checkhealth: async (req, res) => {
+    checkHealth: async (req, res) => {
         try {
-            response = await models.fetchDBTimestamp();
+            const response = await models.fetchDBTimestamp();
             res.json({
                 status: "OK",
                 timestamp: new Date().toISOString(),
@@ -18,6 +18,19 @@ const controllers = {
                 database: "disconnected",
                 error: error.message,
             });
+        }
+    },
+
+    allTasks: async (req, res) => {
+
+        try {
+            const response = await models.fetchAllTasks();
+            res.json({
+                response
+            });
+        }
+        catch (error) {
+            res.status(500).json({ error: error.message });
         }
     }
 }
