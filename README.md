@@ -27,8 +27,8 @@ $ curl localhost:3000/health
 
 - [x] Test express app (GET methods for / and /health)
 - [x] Docker setup
-- [ ] PostgreSQL connectivity with schema creation
-- [ ] Express Server, Middleware
+- [X] PostgreSQL connectivity with schema creation
+- [X] Express Server, Middleware
 - [ ] Database connection pool and utility functions
 - [ ] API Endpoints
 - [ ] Documentation
