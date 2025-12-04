@@ -1,0 +1,13 @@
+services:
+  api:
+    build: .
+    image: task-api-image
+    container_name: task-app-container
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
