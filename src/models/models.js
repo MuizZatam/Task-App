@@ -41,6 +41,33 @@ const models = {
     const response = await pool.query(query, values);
     return response.rows[0];
   },
+
+  updateTask: async (id, fields = {}) => {
+    const keys = Object.keys(fields);
+    if (keys.length === 0) throw new Error("No fields to update");
+
+    let paramCount = 1;
+    const setClauses = [];
+    const values = [];
+
+    for (const key of keys) {
+      setClauses.push(`${key} = $${paramCount}`);
+      values.push(fields[key]);
+      paramCount++;
+    }
+
+    values.push(Number(id));
+
+    const query = `
+    UPDATE tasks
+    SET ${setClauses.join(", ")}
+    WHERE id = $${paramCount}
+    RETURNING *;
+  `;
+
+    const response = await pool.query(query, values);
+    return response.rows[0];
+  },
 };
 
 module.exports = models;

@@ -12,4 +12,6 @@ router.get("/api/tasks", controllers.allTasks);
 
 router.post("/api/tasks", controllers.createTask);
 
+router.put("/api/tasks", controllers.updateTask);
+
 module.exports = router;
