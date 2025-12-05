@@ -7,9 +7,29 @@ const models = {
     return response.rows[0].now;
   },
 
-  fetchAllTasks: async () => {
-    const response = await pool.query("SELECT title, status FROM tasks");
-    return response.rows;
+  fetchAllTasks: async (filters = {}) => {
+
+    let query = 'SELECT * FROM tasks WHERE 1=1';
+    const values = [];
+    let paramCount = 1;
+
+    if (filters.status) {
+      query += ` AND status = $${paramCount}`;
+      values.push(filters.status);
+      paramCount++;
+    }
+
+    if (filters.priority) {
+      query += ` AND priority = $${paramCount}`
+      values.push(filters.priority);
+      paramCount++;
+    }
+
+    query += ' ORDER BY created_at DESC';
+
+    const result = await pool.query(query, values);
+
+    return result.rows;
   },
 
   createTask: async ({ title, description, status, priority, due_date }) => {

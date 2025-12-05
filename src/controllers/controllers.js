@@ -1,4 +1,5 @@
 const models = require("../models/models");
+const utils = require("./utils/utils");
 
 const controllers = {
   checkHealth: async (req, res) => {
@@ -22,9 +23,18 @@ const controllers = {
 
   allTasks: async (req, res) => {
     try {
-      const response = await models.fetchAllTasks();
+      const { status, priority, due_date } = req.query;
+
+      const filters = {};
+
+      if (status) filters.status = utils.titleCase(status);
+      if (priority) filters.priority = utils.titleCase(priority);
+
+      const response = await models.fetchAllTasks(filters);
       res.json({
-        response,
+        count: response.length,
+        filters: filters,
+        tasks: response,
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -33,7 +43,7 @@ const controllers = {
 
   createTask: async (req, res) => {
     try {
-      const { title, description, status, priority, due_date } = req.body;
+      const { title, description, status, priority} = req.body;
 
       if (!title) {
         return res.status(400).json({ error: "Title is required" });
