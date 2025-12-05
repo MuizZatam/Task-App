@@ -68,6 +68,11 @@ const models = {
     const response = await pool.query(query, values);
     return response.rows[0];
   },
+
+  deleteTask: async (id) => {
+    const response = await pool.query('DELETE FROM tasks WHERE id = $1 RETURNING *', [id]);
+    return response.rows[0];
+  }
 };
 
 module.exports = models;

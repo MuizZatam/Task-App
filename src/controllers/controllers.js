@@ -99,6 +99,26 @@ const controllers = {
       console.error("Error updating task: ", error);
       res.status(500).json({error: "Internal server error"});
     }
+  },
+
+  deleteTask: async (req, res) => {
+
+    try {
+
+      const { id } = req.body;
+
+      const response = await models.deleteTask(id);
+
+      res.status(200).json({
+        message: "Task Deleted Succesfully!",
+        deleted: response,
+
+      })
+    }
+    catch (error) {
+      console.error("Error deleting task: ", error);
+      res.status(500).json({error: "Internal Server Error"})
+    }
   }
 };
 

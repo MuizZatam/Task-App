@@ -14,4 +14,6 @@ router.post("/api/tasks", controllers.createTask);
 
 router.put("/api/tasks", controllers.updateTask);
 
+router.delete("/api/tasks", controllers.deleteTask);
+
 module.exports = router;
