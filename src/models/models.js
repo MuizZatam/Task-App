@@ -8,8 +8,7 @@ const models = {
   },
 
   fetchAllTasks: async (filters = {}) => {
-
-    let query = 'SELECT * FROM tasks WHERE 1=1';
+    let query = "SELECT * FROM tasks WHERE 1=1";
     const values = [];
     let paramCount = 1;
 
@@ -20,12 +19,12 @@ const models = {
     }
 
     if (filters.priority) {
-      query += ` AND priority = $${paramCount}`
+      query += ` AND priority = $${paramCount}`;
       values.push(filters.priority);
       paramCount++;
     }
 
-    query += ' ORDER BY created_at DESC';
+    query += " ORDER BY created_at DESC";
 
     const result = await pool.query(query, values);
 

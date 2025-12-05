@@ -43,7 +43,7 @@ const controllers = {
 
   createTask: async (req, res) => {
     try {
-      const { title, description, status, priority} = req.body;
+      const { title, description, status, priority } = req.body;
 
       if (!title) {
         return res.status(400).json({ error: "Title is required" });
