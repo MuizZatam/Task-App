@@ -1,7 +1,6 @@
 const pool = require("../config/database");
-require("dotenv").config();
 
-const models = {
+const taskModels = {
   fetchDBTimestamp: async () => {
     const response = await pool.query("SELECT NOW()");
     return response.rows[0].now;
@@ -75,4 +74,4 @@ const models = {
   }
 };
 
-module.exports = models;
+module.exports = taskModels;

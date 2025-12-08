@@ -1,7 +1,7 @@
-const models = require("../models/models");
+const models = require("../models/taskModels");
 const utils = require("./utils/utils");
 
-const controllers = {
+const taskControllers = {
   checkHealth: async (req, res) => {
     try {
       const response = await models.fetchDBTimestamp();
@@ -23,7 +23,7 @@ const controllers = {
 
   allTasks: async (req, res) => {
     try {
-      const { status, priority} = req.query;
+      const { status, priority } = req.query;
 
       const filters = {};
 
@@ -72,15 +72,14 @@ const controllers = {
   },
 
   updateTask: async (req, res) => {
-
     try {
       const { id, title, description, status, priority, due_date } = req.body;
 
       const fields = {};
 
       if (!id) {
-        return res.status(400).json({ error: "task id is required"});
-      } 
+        return res.status(400).json({ error: "task id is required" });
+      }
 
       if (title) fields.title = title;
       if (description) fields.description = description;
@@ -92,19 +91,16 @@ const controllers = {
 
       res.status(201).json({
         message: "Task Updated Succesfully!",
-        task: updated
-      })
+        task: updated,
+      });
     } catch (error) {
-
       console.error("Error updating task: ", error);
-      res.status(500).json({error: "Internal server error"});
+      res.status(500).json({ error: "Internal server error" });
     }
   },
 
   deleteTask: async (req, res) => {
-
     try {
-
       const { id } = req.body;
 
       const response = await models.deleteTask(id);
@@ -112,14 +108,12 @@ const controllers = {
       res.status(200).json({
         message: "Task Deleted Succesfully!",
         deleted: response,
-
-      })
-    }
-    catch (error) {
+      });
+    } catch (error) {
       console.error("Error deleting task: ", error);
-      res.status(500).json({error: "Internal Server Error"})
+      res.status(500).json({ error: "Internal Server Error" });
     }
-  }
+  },
 };
 
-module.exports = controllers;
+module.exports = taskControllers;
