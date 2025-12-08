@@ -29,6 +29,6 @@ $ curl localhost:3000/health
 - [x] Docker setup
 - [X] PostgreSQL connectivity with schema creation
 - [X] Express Server, Middleware
-- [ ] Database connection pool and utility functions
-- [ ] API Endpoints
+- [X] Database connection pool and utility functions
+- [X] API Endpoints
 - [ ] Documentation
